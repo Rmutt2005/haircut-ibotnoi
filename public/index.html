@@ -225,6 +225,35 @@
         <p class="footer-tech">Powered by Express.js, Supabase & Server-Sent Events (SSE)</p>
     </footer>
 
+    <div id="bn-root"></div>
+
+    <script>
+        window.onload = function() {
+            BN.init({ version: '1.0' });
+        };
+    </script>
+    <script>
+        (function(d, s, id) {
+            var js, bjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://console.botnoi.ai/customerchat/index.js';
+            bjs.parentNode.insertBefore(js, bjs);
+        }(document, 'script', 'bn-jssdk'));
+    </script>
+
+    <div class="bn-customerchat"
+        bot_id="6a4494415ca148a0a94c8410"
+        bot_logo=""
+        bot_name="The Vintage Blade"
+        theme_color="#c5a880"
+        locale="th"
+        logged_in_greeting="สวัสดีครับ ต้องการจองคิวหรือติดต่อร้านได้เลยครับ"
+        greeting_message="สวัสดีครับ เลขาหน้าร้านพร้อมช่วยจองคิวครับ"
+        default_open="false">
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>
