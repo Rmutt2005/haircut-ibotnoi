@@ -800,3 +800,35 @@ body {
     font-size: 0.75rem;
     color: var(--gold-dim);
 }
+
+/* ==========================================
+   BOTNOI CHAT WIDGET THEME
+   ========================================== */
+
+#bn-root [class*="bn-"],
+.bn-customerchat [class*="bn-"] {
+    font-family: 'Montserrat', 'Sarabun', sans-serif !important;
+}
+
+#bn-root button,
+#bn-root [role="button"],
+#bn-root [class*="button"],
+#bn-root [class*="launcher"],
+#bn-root [class*="bubble"] {
+    border-color: var(--gold-dim) !important;
+}
+
+#bn-root [class*="launcher"],
+#bn-root [class*="bubble"],
+#bn-root [class*="toggle"],
+#bn-root button {
+    background-color: var(--gold) !important;
+    color: var(--bg-dark) !important;
+}
+
+#bn-root [class*="launcher"] svg,
+#bn-root [class*="launcher"] path,
+#bn-root [class*="bubble"] svg,
+#bn-root [class*="bubble"] path {
+    fill: var(--bg-dark) !important;
+}
