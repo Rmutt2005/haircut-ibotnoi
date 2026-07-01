@@ -1,0 +1,17 @@
+{
+  "name": "barber-shop-booking-system",
+  "version": "1.0.0",
+  "description": "A real-time Barber Shop Booking System with vintage aesthetics and webhook capabilities for Botnoi AI Agent.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.110.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "express": "^4.21.2"
+  },
+  "author": "Antigravity",
+  "license": "ISC"
+}

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Vintage Blade - Barber Shop Booking & Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@300;400;600;800&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="vintage-overlay"></div>
+
+    <header class="barber-header">
+        <div class="header-container">
+            <div class="barber-pole left-pole"></div>
+            <div class="brand-container">
+                <span class="est-text">EST. 1920</span>
+                <h1 class="brand-title">THE VINTAGE BLADE</h1>
+                <p class="brand-subtitle">BARBERSHOP & GROOMING PARLOUR</p>
+                <div class="divider-gold"></div>
+            </div>
+            <div class="barber-pole right-pole"></div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <section class="services-section">
+            <div class="section-title-wrapper">
+                <h2 class="section-title"><i class="fa-solid fa-scissors gold-icon"></i> SERVICES & MENU</h2>
+                <div class="line-gold"></div>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card primary-service">
+                    <div class="service-badge">MAIN SERVICE</div>
+                    <div class="service-header">
+                        <h3 class="service-name">HAIRCUT (ตัดผมชาย)</h3>
+                        <span class="service-price">150 บาท</span>
+                    </div>
+                    <p class="service-desc">Our signature vintage haircut tailored to your head shape, including hot towel styling and straight razor neck clean.</p>
+                </div>
+
+                <div class="service-card addon-service">
+                    <div class="service-badge addon-badge">ADD-ON</div>
+                    <div class="service-header">
+                        <h3 class="service-name">WASH & DRY (สระ-ไดร์)</h3>
+                        <span class="service-price">+50 บาท</span>
+                    </div>
+                    <p class="service-desc">Refreshing hair wash with premium mint scalp massage shampoo and professional styling blow dry.</p>
+                </div>
+
+                <div class="service-card addon-service">
+                    <div class="service-badge addon-badge">ADD-ON</div>
+                    <div class="service-header">
+                        <h3 class="service-name">HAIR STYLING (เซ็ตผม)</h3>
+                        <span class="service-price">+50 บาท</span>
+                    </div>
+                    <p class="service-desc">Professional styling with premium vintage pomade, clay, or wax for the perfect classic slick-back, pompadour or crop.</p>
+                </div>
+
+                <div class="service-card addon-service">
+                    <div class="service-badge addon-badge">ADD-ON</div>
+                    <div class="service-header">
+                        <h3 class="service-name">SHAVING (โกนหนวด/เครา)</h3>
+                        <span class="service-price">+100 บาท</span>
+                    </div>
+                    <p class="service-desc">Authentic hot towel shave using a traditional straight razor, pre-shave oil, and rich lather for ultimate comfort.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="latest-booking-section" id="latest-booking-card">
+            <div class="latest-heading">
+                <div>
+                    <p class="eyebrow">LATEST BOOKING</p>
+                    <h2>คนจองล่าสุด</h2>
+                </div>
+                <span class="latest-time" id="latest-created-at">รอข้อมูล</span>
+            </div>
+            <div class="latest-empty" id="latest-empty">ยังไม่มีรายการจองเข้ามา</div>
+            <div class="latest-content hidden" id="latest-content">
+                <div>
+                    <span class="latest-label">ชื่อผู้จอง</span>
+                    <strong id="latest-name">-</strong>
+                </div>
+                <div>
+                    <span class="latest-label">เบอร์โทร</span>
+                    <strong id="latest-phone">-</strong>
+                </div>
+                <div>
+                    <span class="latest-label">วันและเวลา</span>
+                    <strong id="latest-datetime">-</strong>
+                </div>
+                <div>
+                    <span class="latest-label">ช่าง</span>
+                    <strong id="latest-barber">-</strong>
+                </div>
+                <div class="latest-services">
+                    <span class="latest-label">บริการ</span>
+                    <div id="latest-services-list" class="services-list-td"></div>
+                </div>
+                <div>
+                    <span class="latest-label">ราคารวม</span>
+                    <strong class="price-text"><span id="latest-price">0</span> บาท</strong>
+                </div>
+            </div>
+        </section>
+
+        <div class="dashboard-grid">
+            <section class="dashboard-section">
+                <div class="section-title-wrapper justify-between">
+                    <h2 class="section-title">
+                        <i class="fa-solid fa-list-check gold-icon"></i> BOOKING STATUS DASHBOARD
+                    </h2>
+                    <div class="status-indicator">
+                        <span class="pulse-dot"></span>
+                        <span class="status-text">LIVE SYNCED (SSE)</span>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="bookings-table" id="bookings-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Date / Time</th>
+                                <th>Barber</th>
+                                <th>Services</th>
+                                <th>Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookings-list">
+                            <tr class="loading-row">
+                                <td colspan="6"><i class="fa-solid fa-spinner fa-spin"></i> Loading appointments...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="simulator-section">
+                <div class="section-title-wrapper">
+                    <h2 class="section-title">
+                        <i class="fa-solid fa-robot gold-icon"></i> BOTNOI WEBHOOK SIMULATOR
+                    </h2>
+                </div>
+                <p class="simulator-intro">
+                    Simulate a webhook payload coming from the <strong>Botnoi AI Agent</strong>.
+                    Submitting this form sends a real <code>POST</code> request to <code>/webhook/botnoi</code>.
+                </p>
+
+                <form id="webhook-simulator-form" class="simulator-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sim-name">Customer Name</label>
+                            <input type="text" id="sim-name" placeholder="เช่น นายประหยัด สมหวัง" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sim-phone">Phone Number</label>
+                            <input type="tel" id="sim-phone" placeholder="เช่น 088-999-8888" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sim-datetime">Date & Time</label>
+                            <input type="datetime-local" id="sim-datetime" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sim-barber">Select Barber</label>
+                            <select id="sim-barber">
+                                <option value="Barber Jack">Barber Jack (Classic Cuts)</option>
+                                <option value="Barber Leo">Barber Leo (Modern Fade)</option>
+                                <option value="Barber Sophia">Barber Sophia (Stylist Expert)</option>
+                                <option value="Any Available Barber">Any Available Barber</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Select Services</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="srv-haircut" checked disabled>
+                                <span class="checkmark"></span>
+                                Haircut (150 บาท)
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="srv-wash" data-price="50" onchange="calculateSimulatorPrice()">
+                                <span class="checkmark"></span>
+                                Wash & Dry (+50 บาท)
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="srv-style" data-price="50" onchange="calculateSimulatorPrice()">
+                                <span class="checkmark"></span>
+                                Hair Styling (+50 บาท)
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" id="srv-shave" data-price="100" onchange="calculateSimulatorPrice()">
+                                <span class="checkmark"></span>
+                                Shaving (+100 บาท)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-footer">
+                        <div class="total-preview">
+                            Total Price: <span id="sim-total-price">150</span> THB
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            <i class="fa-solid fa-paper-plane"></i> Trigger Webhook (POST)
+                        </button>
+                    </div>
+                </form>
+
+                <div id="sim-alert" class="alert hidden"></div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="barber-footer">
+        <p>© 2026 The Vintage Blade Barbershop. Built for Botnoi AI Agent Integration.</p>
+        <p class="footer-tech">Powered by Express.js, Supabase & Server-Sent Events (SSE)</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,802 @@
+/* ==========================================
+   VINTAGE BARBERSHOP STYLE SHEET
+   ========================================== */
+
+:root {
+    --bg-dark: #12100e;          /* Very dark warm brown/black */
+    --card-bg: #1a1512;          /* Rich leather/wood dark brown */
+    --card-hover: #241d19;
+    --gold: #c5a880;             /* Warm vintage brass/gold */
+    --gold-bright: #e8d0b0;
+    --gold-dim: #8c765c;
+    --text-white: #f5f2eb;       /* Off-white parchment tone */
+    --text-muted: #a69e94;
+    --border-color: #382e26;     /* Dark brass border */
+    --accent-red: #a82e2e;
+    --accent-blue: #2e59a8;
+    --glow-gold: rgba(197, 168, 128, 0.2);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-white);
+    font-family: 'Montserrat', 'Sarabun', sans-serif;
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Vintage Paper Noise Overlay */
+.vintage-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.8) 100%);
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Scrollbar customization */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold);
+}
+
+/* ==========================================
+   HEADER & BRANDING
+   ========================================== */
+
+.barber-header {
+    background-color: #0d0b09;
+    border-bottom: 3px double var(--gold);
+    padding: 2.5rem 1rem;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 3rem;
+}
+
+.brand-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.est-text {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+}
+
+.brand-title {
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    color: var(--text-white);
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.8), 0 0 10px var(--glow-gold);
+    margin-bottom: 0.2rem;
+}
+
+.brand-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 0.4em;
+    color: var(--text-muted);
+}
+
+.divider-gold {
+    width: 150px;
+    height: 3px;
+    background-color: var(--gold);
+    margin-top: 1rem;
+    position: relative;
+}
+
+.divider-gold::before, .divider-gold::after {
+    content: "◆";
+    position: absolute;
+    color: var(--gold);
+    font-size: 0.6rem;
+    top: -4px;
+}
+.divider-gold::before { left: -10px; }
+.divider-gold::after { right: -10px; }
+
+/* Barber Pole Animation */
+.barber-pole {
+    width: 25px;
+    height: 120px;
+    border: 3px solid var(--gold);
+    border-radius: 12px;
+    background: repeating-linear-gradient(
+        45deg,
+        var(--accent-red),
+        var(--accent-red) 15px,
+        #f5f2eb 15px,
+        #f5f2eb 30px,
+        var(--accent-blue) 30px,
+        var(--accent-blue) 45px,
+        #f5f2eb 45px,
+        #f5f2eb 60px
+    );
+    background-size: 100% 200%;
+    animation: barber-scroll 3s linear infinite;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5), inset 0 0 5px rgba(0,0,0,0.5);
+    display: none; /* Hidden on small screens, shown on md+ */
+}
+
+@media (min-width: 768px) {
+    .barber-pole {
+        display: block;
+    }
+}
+
+@keyframes barber-scroll {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 -120px; }
+}
+
+/* ==========================================
+   MAIN LAYOUT
+   ========================================== */
+
+.main-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+}
+
+.section-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.gold-icon {
+    font-size: 1.3rem;
+    color: var(--gold);
+}
+
+.line-gold {
+    flex-grow: 1;
+    height: 1px;
+    background-color: var(--border-color);
+}
+
+/* ==========================================
+   SERVICES CARDS
+   ========================================== */
+
+.services-section {
+    margin-bottom: 3rem;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.service-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 1.8rem;
+    border-radius: 8px;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold);
+    box-shadow: 0 8px 25px rgba(197, 168, 128, 0.15);
+    background-color: var(--card-hover);
+}
+
+.service-badge {
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background-color: var(--gold);
+    color: var(--bg-dark);
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.1em;
+}
+
+.addon-badge {
+    background-color: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+}
+
+.service-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.service-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: var(--text-white);
+}
+
+.service-price {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--gold);
+}
+
+.service-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 300;
+}
+
+.primary-service {
+    border: 2px solid var(--gold-dim);
+}
+
+/* ==========================================
+   LATEST BOOKING
+   ========================================== */
+
+.latest-booking-section {
+    background-color: var(--card-bg);
+    border: 1px solid var(--gold-dim);
+    border-radius: 8px;
+    padding: 1.8rem;
+    margin-bottom: 2.5rem;
+    box-shadow: 0 8px 25px rgba(197, 168, 128, 0.12);
+}
+
+.latest-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.latest-heading h2 {
+    font-family: 'Sarabun', 'Montserrat', sans-serif;
+    color: var(--text-white);
+    font-size: 1.6rem;
+}
+
+.eyebrow {
+    color: var(--gold);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    margin-bottom: 0.2rem;
+}
+
+.latest-time {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.latest-empty {
+    color: var(--text-muted);
+    padding: 1rem 0;
+}
+
+.latest-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1rem;
+}
+
+.latest-content > div {
+    background-color: #120f0d;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.9rem;
+}
+
+.latest-label {
+    display: block;
+    color: var(--gold-dim);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+}
+
+.latest-content strong {
+    color: var(--text-white);
+    font-size: 1rem;
+    word-break: break-word;
+}
+
+.latest-services {
+    grid-column: span 2;
+}
+
+@media (max-width: 640px) {
+    .latest-heading {
+        flex-direction: column;
+    }
+
+    .latest-time {
+        text-align: left;
+        white-space: normal;
+    }
+
+    .latest-services {
+        grid-column: span 1;
+    }
+}
+
+/* ==========================================
+   DASHBOARD GRID (Dashboard & Webhook Simulator)
+   ========================================== */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+}
+
+@media (min-width: 992px) {
+    .dashboard-grid {
+        grid-template-columns: 1.6fr 1fr;
+    }
+}
+
+/* ==========================================
+   LIVE DASHBOARD TABLE
+   ========================================== */
+
+.dashboard-section {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 1.8rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: rgba(46, 168, 87, 0.1);
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(46, 168, 87, 0.3);
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #2ea857;
+    border-radius: 50%;
+    animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(46, 168, 87, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(46, 168, 87, 0); }
+    100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(46, 168, 87, 0); }
+}
+
+.status-text {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #2ea857;
+    letter-spacing: 0.05em;
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-top: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+}
+
+.bookings-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.bookings-table th {
+    background-color: #120f0d;
+    color: var(--gold);
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.bookings-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-white);
+    background-color: var(--card-bg);
+}
+
+.bookings-table tr:last-child td {
+    border-bottom: none;
+}
+
+.bookings-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.bookings-table tbody tr:hover {
+    background-color: rgba(197, 168, 128, 0.03);
+}
+
+.loading-row {
+    text-align: center;
+}
+
+.loading-row td {
+    padding: 3rem;
+    color: var(--text-muted);
+}
+
+.empty-row td {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* Highlight Animation for New Webhook Bookings */
+@keyframes highlight-new-row {
+    0% { background-color: rgba(197, 168, 128, 0.4); transform: scale(1.01); }
+    100% { background-color: transparent; transform: scale(1); }
+}
+
+.new-booking-highlight {
+    animation: highlight-new-row 2.5s ease-out;
+}
+
+/* Badges inside table */
+.barber-badge {
+    background-color: rgba(197, 168, 128, 0.1);
+    color: var(--gold);
+    border: 1px solid var(--gold-dim);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.services-list-td {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.service-tag {
+    background-color: #2d2620;
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    padding: 1px 6px;
+    border-radius: 3px;
+    border: 1px solid #3c332b;
+}
+
+.price-text {
+    font-weight: 700;
+    color: var(--gold);
+}
+
+/* ==========================================
+   WEBHOOK SIMULATOR
+   ========================================== */
+
+.simulator-section {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 1.8rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    height: fit-content;
+}
+
+.simulator-intro {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.simulator-intro code {
+    background-color: #0f0d0b;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--gold);
+    font-family: monospace;
+}
+
+.simulator-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 576px) {
+    .form-row {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.form-group input, 
+.form-group select {
+    background-color: #0f0d0b;
+    border: 1px solid var(--border-color);
+    color: var(--text-white);
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-family: 'Montserrat', 'Sarabun', sans-serif;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.form-group input:focus, 
+.form-group select:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 5px var(--glow-gold);
+}
+
+/* Customized Checkboxes */
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+}
+
+@media (min-width: 576px) {
+    .checkbox-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.checkbox-container {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    user-select: none;
+    color: var(--text-white);
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #0f0d0b;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.checkbox-container:hover input ~ .checkmark {
+    border-color: var(--gold);
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background-color: var(--gold);
+    border-color: var(--gold);
+}
+
+.checkbox-container input:disabled ~ .checkmark {
+    background-color: #211a14;
+    border-color: #3d342c;
+    cursor: not-allowed;
+}
+
+.checkbox-container input:disabled {
+    cursor: not-allowed;
+}
+
+.checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark::after {
+    display: block;
+}
+
+.checkbox-container .checkmark::after {
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--bg-dark);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px dashed var(--border-color);
+    padding-top: 1.25rem;
+    margin-top: 0.5rem;
+}
+
+.total-preview {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+#sim-total-price {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--gold);
+}
+
+.btn-submit {
+    background-color: var(--gold);
+    color: var(--bg-dark);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.btn-submit:hover {
+    background-color: var(--gold-bright);
+    box-shadow: 0 0 15px var(--glow-gold);
+}
+
+.btn-submit:active {
+    transform: scale(0.97);
+}
+
+/* Alerts */
+.alert {
+    padding: 0.8rem 1rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-left: 4px solid transparent;
+}
+
+.alert.success {
+    background-color: rgba(46, 168, 87, 0.1);
+    color: #2ea857;
+    border-left-color: #2ea857;
+}
+
+.alert.error {
+    background-color: rgba(168, 46, 46, 0.1);
+    color: #ea4335;
+    border-left-color: #ea4335;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+
+.barber-footer {
+    background-color: #0d0b09;
+    border-top: 1px solid var(--border-color);
+    padding: 2rem 1rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 4rem;
+}
+
+.barber-footer p {
+    margin-bottom: 0.4rem;
+}
+
+.footer-tech {
+    font-size: 0.75rem;
+    color: var(--gold-dim);
+}
