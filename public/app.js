@@ -3,8 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchBookings();
     setupSSE();
 
-    const form = document.getElementById('webhook-simulator-form');
-    form.addEventListener('submit', handleSimulatorSubmit);
+    const form = document.getElementById('manual-booking-form');
+    form.addEventListener('submit', handleManualBookingSubmit);
+
+    ['srv-wash', 'srv-style', 'srv-shave'].forEach(id => {
+        document.getElementById(id).addEventListener('change', calculateBookingPrice);
+    });
 });
 
 function setDefaultDateTime() {
@@ -18,10 +22,10 @@ function setDefaultDateTime() {
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
 
-    document.getElementById('sim-datetime').value = `${year}-${month}-${day}T${hours}:${minutes}`;
+    document.getElementById('booking-datetime').value = `${year}-${month}-${day}T${hours}:${minutes}`;
 }
 
-function calculateSimulatorPrice() {
+function calculateBookingPrice() {
     let total = 150;
 
     const wash = document.getElementById('srv-wash');
@@ -32,7 +36,7 @@ function calculateSimulatorPrice() {
     if (style.checked) total += parseInt(style.getAttribute('data-price'));
     if (shave.checked) total += parseInt(shave.getAttribute('data-price'));
 
-    document.getElementById('sim-total-price').innerText = total;
+    document.getElementById('booking-total-price').innerText = total;
     return total;
 }
 
@@ -185,7 +189,7 @@ function setupSSE() {
     }
 }
 
-async function handleSimulatorSubmit(e) {
+async function handleManualBookingSubmit(e) {
     e.preventDefault();
 
     const services = ['Haircut'];
@@ -194,16 +198,16 @@ async function handleSimulatorSubmit(e) {
     if (document.getElementById('srv-shave').checked) services.push('Shaving');
 
     const payload = {
-        customer_name: document.getElementById('sim-name').value,
-        phone: document.getElementById('sim-phone').value,
-        date_time: document.getElementById('sim-datetime').value,
-        barber_name: document.getElementById('sim-barber').value,
+        customer_name: document.getElementById('booking-name').value,
+        phone: document.getElementById('booking-phone').value,
+        date_time: document.getElementById('booking-datetime').value,
+        barber_name: document.getElementById('booking-barber').value,
         services,
-        total_price: calculateSimulatorPrice()
+        total_price: calculateBookingPrice()
     };
 
-    const alertEl = document.getElementById('sim-alert');
-    showAlert(alertEl, 'info', '<i class="fa-solid fa-spinner fa-spin"></i> Triggering webhook POST...');
+    const alertEl = document.getElementById('booking-alert');
+    showAlert(alertEl, 'info', '<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึกคิว...');
 
     try {
         const response = await fetch('/webhook/botnoi', {
@@ -217,21 +221,21 @@ async function handleSimulatorSubmit(e) {
             throw new Error(result.message || 'Server error occurred');
         }
 
-        showAlert(alertEl, 'success', '<i class="fa-solid fa-circle-check"></i> Webhook simulation successful! Check the Live Dashboard.');
-        document.getElementById('sim-name').value = '';
-        document.getElementById('sim-phone').value = '';
+        showAlert(alertEl, 'success', '<i class="fa-solid fa-circle-check"></i> จองคิวเรียบร้อยแล้ว');
+        document.getElementById('booking-name').value = '';
+        document.getElementById('booking-phone').value = '';
         setDefaultDateTime();
-        document.getElementById('sim-barber').value = 'Barber Jack';
+        document.getElementById('booking-barber').value = 'Barber Jack';
         document.getElementById('srv-wash').checked = false;
         document.getElementById('srv-style').checked = false;
         document.getElementById('srv-shave').checked = false;
-        calculateSimulatorPrice();
+        calculateBookingPrice();
 
         setTimeout(() => {
             alertEl.classList.add('hidden');
         }, 4000);
     } catch (error) {
-        console.error('Webhook simulation failed:', error);
+        console.error('Manual booking failed:', error);
         showAlert(alertEl, 'error', `<i class="fa-solid fa-circle-exclamation"></i> Error: ${escapeHTML(error.message)}`);
     }
 }

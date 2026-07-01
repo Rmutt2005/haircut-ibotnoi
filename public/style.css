@@ -545,10 +545,10 @@ body {
 }
 
 /* ==========================================
-   WEBHOOK SIMULATOR
+   MANUAL BOOKING FORM
    ========================================== */
 
-.simulator-section {
+.booking-form-section {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     padding: 1.8rem;
@@ -557,14 +557,14 @@ body {
     height: fit-content;
 }
 
-.simulator-intro {
+.booking-intro {
     font-size: 0.85rem;
     color: var(--text-muted);
     margin-bottom: 1.5rem;
     line-height: 1.5;
 }
 
-.simulator-intro code {
+.booking-intro code {
     background-color: #0f0d0b;
     padding: 2px 6px;
     border-radius: 4px;
@@ -572,7 +572,7 @@ body {
     font-family: monospace;
 }
 
-.simulator-form {
+.booking-form {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
@@ -720,7 +720,7 @@ body {
     font-weight: 600;
 }
 
-#sim-total-price {
+#booking-total-price {
     font-size: 1.3rem;
     font-weight: 800;
     color: var(--gold);
