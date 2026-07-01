@@ -49,7 +49,6 @@ async function fetchBookings() {
         renderBookings(bookings);
     } catch (error) {
         console.error('Error fetching bookings:', error);
-        renderLatestBooking(null);
         document.getElementById('bookings-list').innerHTML = `
             <tr class="empty-row">
                 <td colspan="6" style="color: #ea4335;">
@@ -64,7 +63,6 @@ function renderBookings(bookings) {
     const list = document.getElementById('bookings-list');
 
     if (!bookings || bookings.length === 0) {
-        renderLatestBooking(null);
         list.innerHTML = `
             <tr class="empty-row">
                 <td colspan="6">No appointments booked yet.</td>
@@ -73,7 +71,6 @@ function renderBookings(bookings) {
         return;
     }
 
-    renderLatestBooking(bookings[0]);
     list.innerHTML = '';
     bookings.forEach(booking => addBookingRow(booking, false));
 }
@@ -89,7 +86,6 @@ function addBookingRow(booking, isNew = false) {
     const row = document.createElement('tr');
     if (isNew) {
         row.classList.add('new-booking-highlight');
-        renderLatestBooking(booking);
     }
 
     const servicesTags = normalizeServices(booking.services)
@@ -111,37 +107,6 @@ function addBookingRow(booking, isNew = false) {
     } else {
         list.appendChild(row);
     }
-}
-
-function renderLatestBooking(booking) {
-    const empty = document.getElementById('latest-empty');
-    const content = document.getElementById('latest-content');
-    const createdAt = document.getElementById('latest-created-at');
-
-    if (!booking) {
-        empty.classList.remove('hidden');
-        content.classList.add('hidden');
-        createdAt.innerText = 'รอข้อมูล';
-        return;
-    }
-
-    empty.classList.add('hidden');
-    content.classList.remove('hidden');
-
-    const formattedDateTime = String(booking.date_time || '').replace('T', ' ');
-    const services = normalizeServices(booking.services);
-
-    document.getElementById('latest-name').innerText = booking.customer_name || '-';
-    document.getElementById('latest-phone').innerText = booking.phone || '-';
-    document.getElementById('latest-datetime').innerText = formattedDateTime || '-';
-    document.getElementById('latest-barber').innerText = booking.barber_name || '-';
-    document.getElementById('latest-price').innerText = booking.total_price || 0;
-    document.getElementById('latest-services-list').innerHTML = services
-        .map(service => `<span class="service-tag">${escapeHTML(service)}</span>`)
-        .join('');
-    createdAt.innerText = booking.created_at
-        ? `บันทึกเมื่อ ${formatCreatedAt(booking.created_at)}`
-        : 'รายการใหม่ล่าสุด';
 }
 
 function setupSSE() {
