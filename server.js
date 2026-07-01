@@ -78,6 +78,18 @@ function normalizeBookingPayload(payload) {
   };
 }
 
+function hasUnresolvedTemplateValue(value) {
+  if (Array.isArray(value)) {
+    return value.some(hasUnresolvedTemplateValue);
+  }
+
+  if (value && typeof value === 'object') {
+    return Object.values(value).some(hasUnresolvedTemplateValue);
+  }
+
+  return typeof value === 'string' && /\{\{[^}]+\}\}/.test(value);
+}
+
 function sendEventToAll(data) {
   clients.forEach(client => {
     client.res.write(`data: ${JSON.stringify(data)}\n\n`);
@@ -127,6 +139,13 @@ async function createBooking(booking) {
 
 app.post('/webhook/botnoi', async (req, res) => {
   const { customer_name, phone, date_time } = req.body;
+
+  if (hasUnresolvedTemplateValue(req.body)) {
+    return res.status(400).json({
+      success: false,
+      message: 'Unresolved template values received. Check ibotnoi parameter mapping before calling this API.'
+    });
+  }
 
   if (!customer_name || !phone || !date_time) {
     return res.status(400).json({
