@@ -87,7 +87,11 @@ function hasUnresolvedTemplateValue(value) {
     return Object.values(value).some(hasUnresolvedTemplateValue);
   }
 
-  return typeof value === 'string' && /\{\{[^}]+\}\}/.test(value);
+  return typeof value === 'string'
+    && (
+      /\{\{[^}]+\}\}/.test(value)
+      || /^<<?[a-zA-Z_][a-zA-Z0-9_]*>>?$/.test(value.trim())
+    );
 }
 
 function sendEventToAll(data) {
