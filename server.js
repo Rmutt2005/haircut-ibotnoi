@@ -193,11 +193,19 @@ app.get('/api/events', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log('==================================================');
-  console.log('Barber Shop Booking System Server is Running!');
-  console.log(`Local Access: http://localhost:${PORT}`);
-  console.log(`Webhook URL : http://localhost:${PORT}/webhook/botnoi`);
-  console.log(`Storage     : ${supabase ? 'Supabase' : 'Memory fallback'}`);
-  console.log('==================================================');
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log('==================================================');
+    console.log('Barber Shop Booking System Server is Running!');
+    console.log(`Local Access: http://localhost:${PORT}`);
+    console.log(`Webhook URL : http://localhost:${PORT}/webhook/botnoi`);
+    console.log(`Storage     : ${supabase ? 'Supabase' : 'Memory fallback'}`);
+    console.log('==================================================');
+  });
+}
+
+module.exports = app;
