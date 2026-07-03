@@ -209,15 +209,17 @@ body {
     font-family: 'Cinzel', serif;
     font-size: clamp(1.2rem, 3vw, 1.65rem);
     letter-spacing: 0.08em;
-    color: var(--gold);
+    color: var(--gold-bright);
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
 }
 
 .gold-icon {
     font-size: 1.3rem;
-    color: var(--gold);
+    color: var(--gold-bright);
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
 }
 
 .line-gold {
@@ -231,7 +233,14 @@ body {
    ========================================== */
 
 .services-section {
+    background:
+        linear-gradient(90deg, rgba(22, 15, 11, 0.88), rgba(43, 31, 23, 0.74)),
+        radial-gradient(circle at left, rgba(201, 173, 121, 0.16), transparent 28rem);
+    border: 1px solid rgba(143, 118, 80, 0.28);
+    border-radius: 8px;
+    box-shadow: var(--shadow-card);
     margin-bottom: 2.3rem;
+    padding: 1.45rem;
 }
 
 .services-grid {
@@ -275,9 +284,10 @@ body {
 }
 
 .addon-badge {
-    background-color: transparent;
-    color: var(--gold);
-    border: 1px solid var(--gold);
+    background-color: var(--gold);
+    color: var(--bg-dark);
+    border: 1px solid var(--gold-bright);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
 }
 
 .service-header {
