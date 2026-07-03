@@ -234,13 +234,27 @@ body {
 
 .services-section {
     background:
-        linear-gradient(90deg, rgba(22, 15, 11, 0.88), rgba(43, 31, 23, 0.74)),
-        radial-gradient(circle at left, rgba(201, 173, 121, 0.16), transparent 28rem);
-    border: 1px solid rgba(143, 118, 80, 0.28);
+        linear-gradient(90deg, rgba(238, 219, 178, 0.78), rgba(212, 184, 128, 0.68)),
+        radial-gradient(circle at left, rgba(255, 248, 222, 0.42), transparent 28rem);
+    border: 1px solid rgba(95, 58, 31, 0.18);
     border-radius: 8px;
     box-shadow: var(--shadow-card);
     margin-bottom: 2.3rem;
     padding: 1.45rem;
+}
+
+.services-section .section-title {
+    color: #4a2f1c;
+    text-shadow: none;
+}
+
+.services-section .gold-icon {
+    color: #4a2f1c;
+    filter: none;
+}
+
+.services-section .line-gold {
+    background-color: rgba(74, 47, 28, 0.28);
 }
 
 .services-grid {
@@ -286,8 +300,8 @@ body {
 .addon-badge {
     background-color: var(--gold);
     color: var(--bg-dark);
-    border: 1px solid var(--gold-bright);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
+    border: none;
+    box-shadow: none;
 }
 
 .service-header {
