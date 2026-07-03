@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Friend Botnoi Chat</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background: #12100e;
+            color: #f5f2eb;
+            font-family: Arial, sans-serif;
+        }
+
+        main {
+            text-align: center;
+        }
+
+        h1 {
+            color: #c5a880;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>ทดสอบแชทบอทของเพื่อน</h1>
+        <p>ถ้า widget โหลดสำเร็จ ปุ่มแชทจะขึ้นมุมขวาล่าง</p>
+    </main>
+
+    <div id="bn-root"></div>
+
+    <script>
+        window.onload = function() {
+            BN.init({ version: '1.0' });
+        };
+    </script>
+    <script>
+        (function(d, s, id) {
+            var js, bjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://console.botnoi.ai/customerchat/index.js';
+            bjs.parentNode.insertBefore(js, bjs);
+        }(document, 'script', 'bn-jssdk'));
+    </script>
+
+    <div class="bn-customerchat"
+        bot_id="6a44c91b5ca148a0a94c90f7"
+        bot_logo=""
+        bot_name="Friend Bot"
+        theme_color="#00AEEF"
+        locale="th"
+        logged_in_greeting="สวัสดีครับ"
+        greeting_message="เริ่มทดสอบแชทได้เลยครับ"
+        default_open="true">
+    </div>
+</body>
+</html>
