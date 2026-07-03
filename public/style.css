@@ -3,18 +3,21 @@
    ========================================== */
 
 :root {
-    --bg-dark: #12100e;          /* Very dark warm brown/black */
-    --card-bg: #1a1512;          /* Rich leather/wood dark brown */
-    --card-hover: #241d19;
-    --gold: #c5a880;             /* Warm vintage brass/gold */
-    --gold-bright: #e8d0b0;
-    --gold-dim: #8c765c;
-    --text-white: #f5f2eb;       /* Off-white parchment tone */
-    --text-muted: #a69e94;
-    --border-color: #382e26;     /* Dark brass border */
+    --bg-dark: #0f0b08;
+    --bg-panel: #17120f;
+    --card-bg: rgba(28, 21, 17, 0.92);
+    --card-hover: #241b16;
+    --gold: #c9ad79;
+    --gold-bright: #ead7ad;
+    --gold-dim: #8f7650;
+    --text-white: #f7f0e4;
+    --text-muted: #b8aa96;
+    --border-color: rgba(201, 173, 121, 0.22);
     --accent-red: #a82e2e;
     --accent-blue: #2e59a8;
-    --glow-gold: rgba(197, 168, 128, 0.2);
+    --glow-gold: rgba(201, 173, 121, 0.2);
+    --shadow-soft: 0 18px 48px rgba(0, 0, 0, 0.32);
+    --shadow-card: 0 10px 28px rgba(0, 0, 0, 0.24);
 }
 
 * {
@@ -24,9 +27,12 @@
 }
 
 body {
-    background-color: var(--bg-dark);
+    background:
+        radial-gradient(circle at top left, rgba(201, 173, 121, 0.12), transparent 34rem),
+        radial-gradient(circle at bottom right, rgba(168, 46, 46, 0.08), transparent 28rem),
+        linear-gradient(135deg, #0c0907 0%, #15100d 52%, #0f0b08 100%);
     color: var(--text-white);
-    font-family: 'Montserrat', 'Sarabun', sans-serif;
+    font-family: 'Sarabun', sans-serif;
     line-height: 1.6;
     position: relative;
     overflow-x: hidden;
@@ -39,7 +45,10 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.8) 100%);
+    background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        radial-gradient(circle, transparent 54%, rgba(0,0,0,0.66) 100%);
+    background-size: 100% 3px, auto;
     pointer-events: none;
     z-index: 10;
 }
@@ -64,12 +73,14 @@ body {
    ========================================== */
 
 .barber-header {
-    background-color: #0d0b09;
-    border-bottom: 3px double var(--gold);
-    padding: 2.5rem 1rem;
+    background:
+        linear-gradient(180deg, rgba(13, 10, 8, 0.96), rgba(18, 13, 10, 0.9)),
+        radial-gradient(circle at center, rgba(201, 173, 121, 0.12), transparent 34rem);
+    border-bottom: 1px solid var(--border-color);
+    padding: 2.8rem 1rem 2.4rem;
     text-align: center;
     position: relative;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    box-shadow: var(--shadow-soft);
 }
 
 .header-container {
@@ -90,25 +101,25 @@ body {
 .est-text {
     font-family: 'Cinzel', serif;
     font-size: 0.85rem;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.28em;
     color: var(--gold);
     margin-bottom: 0.5rem;
 }
 
 .brand-title {
     font-family: 'Cinzel', serif;
-    font-size: 3rem;
+    font-size: clamp(2.1rem, 6vw, 4.4rem);
     font-weight: 900;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.12em;
     color: var(--text-white);
-    text-shadow: 2px 2px 0px rgba(0,0,0,0.8), 0 0 10px var(--glow-gold);
+    text-shadow: 0 3px 0 rgba(0,0,0,0.85), 0 0 24px rgba(201, 173, 121, 0.18);
     margin-bottom: 0.2rem;
 }
 
 .brand-subtitle {
-    font-family: 'Cinzel', serif;
+    font-family: 'Libre Baskerville', serif;
     font-size: 1rem;
-    letter-spacing: 0.4em;
+    letter-spacing: 0.22em;
     color: var(--text-muted);
 }
 
@@ -170,15 +181,15 @@ body {
 
 .main-container {
     max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1.5rem;
+    margin: 2.6rem auto;
+    padding: 0 1.4rem;
 }
 
 .section-title-wrapper {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.35rem;
 }
 
 .justify-between {
@@ -187,8 +198,8 @@ body {
 
 .section-title {
     font-family: 'Cinzel', serif;
-    font-size: 1.5rem;
-    letter-spacing: 0.1em;
+    font-size: clamp(1.2rem, 3vw, 1.65rem);
+    letter-spacing: 0.08em;
     color: var(--gold);
     display: flex;
     align-items: center;
@@ -211,32 +222,33 @@ body {
    ========================================== */
 
 .services-section {
-    margin-bottom: 3rem;
+    margin-bottom: 2.3rem;
 }
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
 }
 
 .service-card {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
-    padding: 1.8rem;
+    padding: 1.55rem;
     border-radius: 8px;
     position: relative;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow-card);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-height: 180px;
 }
 
 .service-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
     border-color: var(--gold);
-    box-shadow: 0 8px 25px rgba(197, 168, 128, 0.15);
+    box-shadow: 0 14px 32px rgba(201, 173, 121, 0.14);
     background-color: var(--card-hover);
 }
 
@@ -268,13 +280,13 @@ body {
 }
 
 .service-name {
-    font-family: 'Cinzel', serif;
+    font-family: 'Libre Baskerville', 'Sarabun', serif;
     font-size: 1.1rem;
     color: var(--text-white);
 }
 
 .service-price {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Cinzel', serif;
     font-size: 1.3rem;
     font-weight: 800;
     color: var(--gold);
@@ -313,9 +325,9 @@ body {
 .dashboard-section {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
-    padding: 1.8rem;
+    padding: 1.65rem;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow-card);
 }
 
 .status-indicator {
@@ -360,24 +372,24 @@ body {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
 }
 
 .bookings-table th {
-    background-color: #120f0d;
+    background-color: rgba(18, 15, 13, 0.96);
     color: var(--gold);
     font-family: 'Cinzel', serif;
     font-weight: 700;
-    letter-spacing: 0.05em;
-    padding: 1rem;
+    letter-spacing: 0.04em;
+    padding: 0.95rem;
     border-bottom: 2px solid var(--border-color);
 }
 
 .bookings-table td {
-    padding: 1rem;
+    padding: 0.95rem;
     border-bottom: 1px solid var(--border-color);
     color: var(--text-white);
-    background-color: var(--card-bg);
+    background-color: rgba(28, 21, 17, 0.72);
 }
 
 .bookings-table tr:last-child td {
@@ -456,16 +468,16 @@ body {
 .booking-form-section {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
-    padding: 1.8rem;
+    padding: clamp(1.25rem, 3vw, 1.9rem);
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow-card);
     height: fit-content;
 }
 
 .booking-form-feature {
-    margin-bottom: 2.5rem;
+    margin-bottom: 2.4rem;
     border-color: var(--gold-dim);
-    box-shadow: 0 8px 25px rgba(197, 168, 128, 0.12);
+    box-shadow: 0 16px 44px rgba(201, 173, 121, 0.11);
 }
 
 .booking-intro {
@@ -486,18 +498,24 @@ body {
 .booking-form {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.15rem;
 }
 
 .form-row {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 0.95rem;
 }
 
 @media (min-width: 576px) {
     .form-row {
         grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 900px) {
+    .booking-form .checkbox-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 }
 
@@ -511,7 +529,7 @@ body {
     font-size: 0.8rem;
     font-weight: 600;
     color: var(--gold);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
 }
 
@@ -520,9 +538,9 @@ body {
     background-color: #0f0d0b;
     border: 1px solid var(--border-color);
     color: var(--text-white);
-    padding: 0.75rem;
+    padding: 0.82rem 0.9rem;
     border-radius: 4px;
-    font-family: 'Montserrat', 'Sarabun', sans-serif;
+    font-family: 'Sarabun', sans-serif;
     font-size: 0.9rem;
     transition: all 0.2s ease;
 }
@@ -538,7 +556,7 @@ body {
 .checkbox-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 0.5rem;
+    gap: 0.65rem;
 }
 
 @media (min-width: 576px) {
@@ -553,7 +571,7 @@ body {
     padding-left: 30px;
     margin-bottom: 8px;
     cursor: pointer;
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     user-select: none;
     color: var(--text-white);
 }
@@ -641,14 +659,14 @@ body {
     background-color: var(--gold);
     color: var(--bg-dark);
     border: none;
-    padding: 0.8rem 1.5rem;
+    padding: 0.84rem 1.45rem;
     border-radius: 4px;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Sarabun', sans-serif;
     font-size: 0.85rem;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
 }
 
@@ -659,6 +677,18 @@ body {
 
 .btn-submit:active {
     transform: scale(0.97);
+}
+
+@media (max-width: 640px) {
+    .form-footer,
+    .section-title-wrapper.justify-between {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .btn-submit {
+        width: 100%;
+    }
 }
 
 /* Alerts */
@@ -694,7 +724,7 @@ body {
    ========================================== */
 
 .barber-footer {
-    background-color: #0d0b09;
+    background-color: rgba(13, 11, 9, 0.95);
     border-top: 1px solid var(--border-color);
     padding: 2rem 1rem;
     text-align: center;
@@ -718,7 +748,7 @@ body {
 
 #bn-root [class*="bn-"],
 .bn-customerchat [class*="bn-"] {
-    font-family: 'Montserrat', 'Sarabun', sans-serif !important;
+    font-family: 'Sarabun', sans-serif !important;
 }
 
 #bn-root button,
@@ -743,3 +773,4 @@ body {
 #bn-root [class*="bubble"] path {
     fill: var(--bg-dark) !important;
 }
+
